@@ -56,7 +56,7 @@ If your bundle needs to use both libraries, just call both initializing methods,
 
 = Configuring the Logback bundle =
 
-In the previous part of the series, I've shown how to create an OSGi bundle. We'll just use it and set up a configuration file (please refer to the article if you need further technical details). You can skip the config file part if the default log-all-to-stdout is fine for you.
+In the previous part of the series, I've shown how to create an OSGi bundle for Logback (the Log4J's successor). We'll just use it and set up a configuration file (please refer to the article if you need further technical details). You can skip the config file part if the default log-all-to-stdout is fine for you.
 
 For instance, given the following configuration file at location /tmp/config.xml:
 
@@ -92,12 +92,22 @@ java -Dlogback.configurationFile=/tmp/config.xml ...
 
 The loggers name referenced in file are the symbolic bundle name, and you can adjust the logging properties of each of them; please refer to the logback documentation for the details.
 
-= Testing the configuration =
+= Testing everything =
 
-You can quickly test the configuration from a blank felix installation:
+You can quickly test the configuration from a blank felix installation. 
+To install the bundles directly from the OSGi shell, use the following commands:
 
-{{{
+ * {{{ install http://oscar-osgi.sf.net/repo/log/log.jar }}} to install a LogService (if there is not already one installed)
 
+ * {{{ install http://osgi-logging.googlecode.com/files/LogbackBundle-1.0.jar }}} to install the Logback-based LogListener back-end.
+
+ * {{{ install http://osgi-logging.googlecode.com/files/commons-logging-osgi-test-bundle-1.0.jar }}} to install a log tester using the commons-logging-osgi bridge. It generates logs every few seconds (Warning: it really generates LOADS of logs, I should probably fix that)
+
+ *  {{{ http://osgi-logging.googlecode.com/files/slf4j-osgi-test-bundle-1.0.jar }}} to install a log tester using the slf4j API (comments above apply on this bundle as well)
+
+Please see below for a session using the Felix OSGi server:
+
+{{{ 
 c:\temp\felix-1.4.0>java -Dorg.apache.commons.logging.LogFactory=net.kornr.osgi.jcl.LogOSGIFactory -jar bin\felix.jar
 
 Welcome to Felix.
@@ -114,8 +124,7 @@ START LEVEL 1
 Bundle ID: 4
 -> install http://osgi-logging.googlecode.com/files/LogbackBundle-1.0.jar
 Bundle ID: 5
--> install http://osgi-logging.googlecode.com/files/commons-logging-osgi-test-bu
-ndle-1.0.jar
+-> install http://osgi-logging.googlecode.com/files/commons-logging-osgi-test-bundle-1.0.jar
 Bundle ID: 6
 -> ps
 START LEVEL 1
@@ -170,3 +179,6 @@ You can download the bundles and the libraries directly from the google code pro
 The "normal" commons-logging and slf4j jar should be downloaded from their respective web sites:
  * [http://commons.apache.org/logging/ Apache Commons Logging]
  * [http://www.slf4j.org/ SLF4J]
+
+You can grab or browser the source code on the appropriate google-code page:
+ * [http://code.google.com/p/osgi-logging/source/checkout]
