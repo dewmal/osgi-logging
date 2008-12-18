@@ -1,4 +1,4 @@
-#summary Documentation related to logging in an OSGi environment
+#summary Documentation related to logging in an OSGi environment (4/4)
 
 In a componentized world such as OSGi, Logging is not anymore a matter of instanciating a logger and using it, it's become a strict procedure which starts with requesting a reference to the logging service, checking that the service is available, and finally calling its methods. I know, all this sounds like a cheesy overhead just for some stupid logging, while all we want is living the simple life of POJO. But it's not just about logging here, it's about having a dynamic environment, being able to dynamically start, stop, update, and change any service without other components having to worry about it. And fortunately, OSGi manages to keep it simple.
 
