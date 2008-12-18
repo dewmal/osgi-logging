@@ -4,9 +4,15 @@ In a componentized world such as OSGi, Logging is not anymore a matter of instan
 
 I've started my series about logging in OSGi out of the sad notice that most blog entries and comments just missed the point and had an erroneous idea of logging on OSGi, mainly because they are trying to use log4j or the java.logging API as they are used to, without taking into account the drastic change of architecture imposed by the OSGI component model. 
 
-For instance, implementing a LogService hard-coded to bind on logback or log4j is definitely a bad idea: OSGi is all about dynamic component, and it's much better to build a LogListener leant against logback or log4j, and let it connect to the LogReaderService. That way, not only can we easily swap the component in charge of storing/processing the logs, but we can combine several of them if needed.
+For instance, implementing a LogService hard-coded to bind on logback or log4j (or any specific engine) is definitely a bad idea: OSGi is all about dynamic component, and the way to go is to build a LogListener backed by logback or log4j, and let it connect to the LogReaderService. That way, not only can we easily *swap* the component in charge of storing/processing the logs, but we can also *combine* several of them if needed.
 
-= The overall workflow =
+This is what should be avoided:
+
+[http://sites.google.com/site/osgistuff/Home/osgi-wrong.png]
+
+Unfortunately, most logging libraries are done like that, including Pax Logging or the bundles provided for slf4j or logback.
+
+On the other hand, a logging architecture that fits the dynamic component model proposed by OSGi should rather look like this:
 
 [http://1571617898373253522-a-1802744773732722657-s-sites.googlegroups.com/site/osgistuff/Home/osgi-workflow.png]
 
