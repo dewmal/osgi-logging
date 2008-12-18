@@ -16,6 +16,8 @@ On the other hand, a logging architecture that fits the dynamic component model 
 
 [http://1571617898373253522-a-1802744773732722657-s-sites.googlegroups.com/site/osgistuff/Home/osgi-workflow.png]
 
+Note how this architecture respects what we expects of components: dynamically updateable, swappable and combinable.
+
 = Building the bundles =
 
 If your bundle only contains your own code and has no dependency on third-party libraries, you may just use the LogService straight. However, even in this case, it's still more convenient to use one of the two facades provided below (commons-logging or sl4j): not only will your code be able to run in a non-OSGi compliant environment as well, but the libraries provided here will take care of managing the log services available on the server. 
