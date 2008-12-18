@@ -1,4 +1,4 @@
-#summary OSGI-fying the apache commons-logging API.
+#summary OSGI-fying the apache commons-logging API (2/4)
 
 There's a funny FUD that has been going on for some time, stating that the apache commons-logging library is definitely not compliant with OSGI, because of some surprising classloading issue. This even reached the apache commons wiki, which states the following:
 
