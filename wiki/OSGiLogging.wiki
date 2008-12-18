@@ -96,12 +96,77 @@ The loggers name referenced in file are the symbolic bundle name, and you can ad
 
 You can quickly test the configuration from a blank felix installation:
 
-EXAMPLE OF SESSION with install url...
+{{{
 
+c:\temp\felix-1.4.0>java -Dorg.apache.commons.logging.LogFactory=net.kornr.osgi.jcl.LogOSGIFactory -jar bin\felix.jar
+
+Welcome to Felix.
+=================
+
+-> ps
+START LEVEL 1
+   ID   State         Level  Name
+[   0] [Active     ] [    0] System Bundle (1.4.0)
+[   1] [Active     ] [    1] Apache Felix Shell Service (1.0.2)
+[   2] [Active     ] [    1] Apache Felix Shell TUI (1.0.2)
+[   3] [Active     ] [    1] Apache Felix Bundle Repository (1.2.1)
+-> install http://oscar-osgi.sf.net/repo/log/log.jar
+Bundle ID: 4
+-> install http://osgi-logging.googlecode.com/files/LogbackBundle-1.0.jar
+Bundle ID: 5
+-> install http://osgi-logging.googlecode.com/files/commons-logging-osgi-test-bu
+ndle-1.0.jar
+Bundle ID: 6
+-> ps
+START LEVEL 1
+   ID   State         Level  Name
+[   0] [Active     ] [    0] System Bundle (1.4.0)
+[   1] [Active     ] [    1] Apache Felix Shell Service (1.0.2)
+[   2] [Active     ] [    1] Apache Felix Shell TUI (1.0.2)
+[   3] [Active     ] [    1] Apache Felix Bundle Repository (1.2.1)
+[   4] [Installed  ] [    1] Log Service (1.0.0)
+[   5] [Installed  ] [    1] LogBackend (1.0.0)
+[   6] [Installed  ] [    1] Commons_logging_test_bundle Plug-in (1.0.0)
+-> start 4
+-> start 5
+-> 21:59:13.861 [Thread-1] INFO  LogBackend - BundleEvent.STARTED
+start 6
+21:59:20.901 [Thread-1] INFO  n.k.log.commons_logging_test_bundle - null
+-> 21:59:20.942 [Thread-1] INFO  n.k.log.commons_logging_test_bundle - BundleEve
+nt.STARTED
+21:59:20.948 [Thread-1] DEBUG n.k.log.commons_logging_test_bundle - JCL-debug-log=Thu Dec 18 21:59:20 CET 2008
+21:59:20.949 [Thread-1] INFO  n.k.log.commons_logging_test_bundle - JCL-info-log=Thu Dec 18 21:59:20 CET 2008
+21:59:20.949 [Thread-1] WARN  n.k.log.commons_logging_test_bundle - JCL-warning-log=Thu Dec 18 21:59:20 CET 2008
+21:59:20.950 [Thread-1] ERROR n.k.log.commons_logging_test_bundle - JCL-error-log=Thu Dec 18 21:59:20 CET 2008
+21:59:20.956 [Thread-1] DEBUG n.k.log.commons_logging_test_bundle - JCL-debug-log=Thu Dec 18 21:59:20 CET 2008
+java.lang.Exception: An EXCEPTION!
+        at commons_logging_test_bundle.Activator$1.run(Unknown Source) [na:na]
+        at java.lang.Thread.run(Unknown Source) [na:1.6.0_07]
+21:59:20.969 [Thread-1] INFO  n.k.log.commons_logging_test_bundle - JCL-info-log=Thu Dec 18 21:59:20 CET 2008
+java.lang.Exception: An EXCEPTION!
+        at commons_logging_test_bundle.Activator$1.run(Unknown Source) [na:na]
+        at java.lang.Thread.run(Unknown Source) [na:1.6.0_07]
+21:59:20.974 [Thread-1] WARN  n.k.log.commons_logging_test_bundle - JCL-warning-log=Thu Dec 18 21:59:20 CET 2008
+java.lang.Exception: An EXCEPTION!
+        at commons_logging_test_bundle.Activator$1.run(Unknown Source) [na:na]
+        at java.lang.Thread.run(Unknown Source) [na:1.6.0_07]
+21:59:20.996 [Thread-1] ERROR n.k.log.commons_logging_test_bundle - JCL-error-log=Thu Dec 18 21:59:20 CET 2008
+java.lang.Exception: An EXCEPTION!
+        at commons_logging_test_bundle.Activator$1.run(Unknown Source) [na:na]
+        at java.lang.Thread.run(Unknown Source) [na:1.6.0_07]
+stop 6
+-> 21:59:23.223 [Thread-1] INFO  n.k.log.commons_logging_test_bundle - BundleEvent.STOPPED
+shutdown
+->
+c:\temp\felix-1.4.0>
+
+
+}}}
 = Download the libraries =
-- commons-logging-osgi.jar
-- slf4j-osgi.jar
+
+You can download the bundles and the libraries directly from the google code project page:
+ * [http://code.google.com/p/osgi-logging/downloads/list]
 
 The "normal" commons-logging and slf4j jar should be downloaded from their respective web sites:
-- commons-logging
-- slf4j
+ * [http://commons.apache.org/logging/ Apache Commons Logging]
+ * [http://www.slf4j.org/ SLF4J]
